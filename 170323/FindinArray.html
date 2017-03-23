@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Kuqs个人博客 by uk9921</title>
+
+    <link rel="stylesheet" href="../../stylesheets/styles.css">
+    <link rel="stylesheet" href="../../stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Kuqs个人博客</h1>
+        <p>Long May The Sunshine !</p>
+
+
+        <p class="view"><a href="https://github.com/uk9921">View My GitHub Profile</a></p>
+
+      </header>
+      <section>
+        <h2>
+
+<a id="python" class="anchor"  aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="">Python in leetcode [最长不重复子串]</a>
+</h2>
+
+
+<p>
+在一个二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。
+</p>
+
+<pre><code> 
+# -*- coding:utf-8 -*-
+class Solution:
+    # array 二维列表
+    def Find(self, tar, array):
+        # write code here
+        if not array:
+            return False
+        if len(array) == 1 and (not array[0]):
+            return False
+        for i in xrange(len(array)):
+            if array[i][-1]<tar or array[i][0]>tar:
+                continue
+            for j in range(len(array[i])):
+                if array[i][j] == tar:
+                    return True
+        return False
+</code></pre>
+
+<p>
+注：这种方法不是最好的，因为想先提交一个结果，没想到直接过了~
+<br>
+其实还有更好的方法：以左下角的数字为起点，往上走均会变小，往右走均会变大。
+</p>
+<pre><code> 
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        used_char = {}
+        res = begin = 0
+        for i in range(0,len(s)):
+            if used_char.has_key(s[i]) and begin <= used_char[s[i]]:
+                begin = used_char[s[i]]+1
+            else:
+                res = max(res, i-begin+1)
+            used_char[s[i]] = i
+        return res
+</code></pre>
+
+
+
+
+
+      </section>
+      <footer>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
