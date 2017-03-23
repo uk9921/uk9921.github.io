@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Kuqs个人博客 by uk9921</title>
+
+    <link rel="stylesheet" href="../../stylesheets/styles.css">
+    <link rel="stylesheet" href="../../stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Kuqs个人博客</h1>
+        <p>Long May The Sunshine !</p>
+
+
+        <p class="view"><a href="https://github.com/uk9921">View My GitHub Profile</a></p>
+
+      </header>
+      <section>
+        <h2>
+
+<a id="python-in-leetcode-最长不重复子串" class="anchor"  aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="http://baidu.com">Python in leetcode [最长不重复子串]</a>
+</h2>
+
+
+<p>
+  Given a string, find the length of the longest substring without repeating characters.
+
+Examples:
+
+Given "<code>abcabcbb</code>", the answer is "<code>abc</code>", which the length is 3.
+
+Given "<code>bbbbb</code>", the answer is "<code>b</code>", with the length of 1.
+
+Given "<code>pwwkew</code>", the answer is "<code>wke</code>", with the length of 3. 
+
+Note that the answer must be a substring, "<code>pwke</code>" is a subsequence and not a substring.
+</p>
+
+<pre><code> 
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        char_array = []
+        res = 0
+        temp = 0
+        for i in range(0,95):
+            char_array.append(0)
+        arr = list(s)
+        char_array_bak = char_array[:]
+        for index in range(len(arr)):
+            if char_array_bak[ord(arr[index])-32]==0:
+                char_array_bak[ord(arr[index])-32] = 1
+                temp += 1 
+                if temp>res:
+                    res = temp
+            else:
+                char_array_bak = char_array[:]
+                for index2 in range(index,0,-1):
+                    if arr[index2-1]==arr[index]:
+                        for k in range(index2,index+1):
+                            char_array_bak[ord(arr[k])-32] = 1
+                        temp = index - index2 + 1
+                        break
+        return res
+</code></pre>
+
+<p>
+上段代码思想江化，很很长很蠢。 但是转换一下思路，记录每一串不重复子串开始的位置，直到结束时计算其长度，与之前出现过的最长不重复子串比长度。
+<br />此时只需要O(n)的时间复杂度就搞定了
+</p>
+<pre><code> 
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        used_char = {}
+        res = begin = 0
+        for i in range(0,len(s)):
+            if used_char.has_key(s[i]) and begin <= used_char[s[i]]:
+                begin = used_char[s[i]]+1
+            else:
+                res = max(res, i-begin+1)
+            used_char[s[i]] = i
+        return res
+</code></pre>
+
+
+
+
+
+      </section>
+      <footer>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
