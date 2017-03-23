@@ -1,0 +1,153 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Kuqs个人博客 by uk9921</title>
+
+    <link rel="stylesheet" href="../../stylesheets/styles.css">
+    <link rel="stylesheet" href="../../stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Kuqs个人博客</h1>
+        <p>Long May The Sunshine !</p>
+
+
+        <p class="view"><a href="https://github.com/uk9921">View My GitHub Profile</a></p>
+
+      </header>
+      <section>
+        <h2>
+
+<a id="python-中的排序算法" class="anchor"  aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="">Python in leetcode [最长不重复子串]</a>
+</h2>
+
+
+
+<h3>（一）插入排序</h3>
+<p>
+每次循环之前，前面i位总是有序的
+</p>
+
+<pre><code> 
+def insert_sort(list):
+    for i in range(len(list)):
+        key = list[i]
+        for j in range(i-1,-1,-1):
+            if key < list[j]:
+                list[j+1] = list[j]
+                list[j] = key
+    return list
+print insert_sort([5,4,3,2,1])
+</code></pre>
+<h3>
+（二）冒泡排序
+</h3>
+<p>
+每次循环，跟无序子list的首位比，每次循环有一个最值沉到/浮到这个首位
+</p>
+
+<pre><code> 
+def bubble_sort(list):
+    for i in range(len(list)):
+        for j in range(i+1,len(list)):
+            if list[i] > list[j]:
+                list[j],list[i] = list[i],list[j]
+　　return list
+</code></pre>
+<h3>（三）快速排序</h3>
+<p>
+每次抽第一个数为flag，然后调整成左边比他小，右边比他大，随后递归
+</p>
+
+<pre><code> 
+def part_sort(list,start,end):
+    if start >= end-1:
+        return
+    flag = list[start]
+    i = start
+    for j in range(start+1,end):
+        if list[j] < flag:
+            i += 1
+            if list[i] != list[j]:
+                list[i],list[j] = list[j],list[i]
+        else:
+            pass
+    list[i],list[start] = list[start],list[i]
+    return i
+def quick_sort(list,start,end):
+    if start>=end-1:
+        return
+    flag_index = part_sort(list,start,end)
+    quick_sort(list,start,flag_index)
+    quick_sort(list,flag_index+1,end)
+    return list
+</code></pre>
+<h3>（四） 堆排序</h3>
+<p>用于计算TopK效果良好~
+</p>
+
+<pre><code> 
+def fixDown(a,k,n): #自顶向下堆化，从k开始堆化  
+    N=n-1  
+    while 2*k<=N:  
+        j=2*k  
+        if j<N and a[j]<a[j+1]: #选出左右孩子节点中更大的那个  
+            j+=1  
+        if a[k]<a[j]:  
+            a[k],a[j]=a[j],a[k]  
+            k=j  
+        else:  
+            break  
+  
+def heapSort(l):  
+    n=len(l)-1  
+    for i in range(n//2,0,-1):  
+        fixDown(l,i,len(l))  
+    while n>1:  
+        l[1],l[n]=l[n],l[1]  
+        fixDown(l,1,n)  
+        n-=1  
+    return l[1:]  
+  
+l=[-1,26,5,77,1,61,11,59,15,48,19] #第一个元素不用，占位  
+res=heapSort(l)  
+print(res)
+</code></pre>
+<pre><code> 
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        used_char = {}
+        res = begin = 0
+        for i in range(0,len(s)):
+            if used_char.has_key(s[i]) and begin <= used_char[s[i]]:
+                begin = used_char[s[i]]+1
+            else:
+                res = max(res, i-begin+1)
+            used_char[s[i]] = i
+        return res
+</code></pre>
+
+
+
+
+
+      </section>
+      <footer>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
