@@ -61,23 +61,6 @@ class Solution(object):
 <p>
 最初使用了两层for循环，运行超时了，新方法如上，使用一层循环记最长回文子串的开始下标和长度。
 </p>
-<pre><code> 
-class Solution(object):
-    def lengthOfLongestSubstring(self, s):
-        """
-        :type s: str
-        :rtype: int
-        """
-        used_char = {}
-        res = begin = 0
-        for i in range(0,len(s)):
-            if used_char.has_key(s[i]) and begin <= used_char[s[i]]:
-                begin = used_char[s[i]]+1
-            else:
-                res = max(res, i-begin+1)
-            used_char[s[i]] = i
-        return res
-</code></pre>
 
 
 
