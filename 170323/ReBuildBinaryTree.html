@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Kuqs个人博客 by uk9921</title>
+
+    <link rel="stylesheet" href="../../stylesheets/styles.css">
+    <link rel="stylesheet" href="../../stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Kuqs个人博客</h1>
+        <p>Long May The Sunshine !</p>
+
+
+        <p class="view"><a href="https://github.com/uk9921">View My GitHub Profile</a></p>
+
+      </header>
+      <section>
+        <h2>
+
+<a id="python-in-leetcode-最长不重复子串" class="anchor"  aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="">Python in leetcode [最长不重复子串]</a>
+</h2>
+
+<h3>重建二叉树</h3>
+<p>
+输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建二叉树并返回。
+</p>
+
+<pre><code> 
+# -*- coding:utf-8 -*-
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+class Solution:
+    # 返回构造的TreeNode根节点
+    def reConstructBinaryTree(self, pre, tin):
+        # write code here
+        if len(pre) <= 0 or len(tin) <= 0:
+            return None
+        root = TreeNode(pre[0])
+        for i in range(len(tin)):
+            if pre[0] == tin[i]:
+                root.left = self.reConstructBinaryTree(pre[1:i+1], tin[0:i])
+                root.right = self.reConstructBinaryTree(pre[i+1:], tin[i+1:])
+                return root
+</code></pre>
+
+<p>
+考察动态规划，只需要顺着根节点找到下一层的“根节点”，返回给上一层做左右孩子结点~~
+</p>
+<pre><code> 
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        used_char = {}
+        res = begin = 0
+        for i in range(0,len(s)):
+            if used_char.has_key(s[i]) and begin <= used_char[s[i]]:
+                begin = used_char[s[i]]+1
+            else:
+                res = max(res, i-begin+1)
+            used_char[s[i]] = i
+        return res
+</code></pre>
+
+
+
+
+
+      </section>
+      <footer>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
