@@ -61,27 +61,6 @@ class Solution:
 <p>
 用list保存一下ListNode，然后反转，搞定~用时20ms
 </p>
-<pre><code> 
-class Solution(object):
-    def lengthOfLongestSubstring(self, s):
-        """
-        :type s: str
-        :rtype: int
-        """
-        used_char = {}
-        res = begin = 0
-        for i in range(0,len(s)):
-            if used_char.has_key(s[i]) and begin <= used_char[s[i]]:
-                begin = used_char[s[i]]+1
-            else:
-                res = max(res, i-begin+1)
-            used_char[s[i]] = i
-        return res
-</code></pre>
-
-
-
-
 
       </section>
       <footer>
