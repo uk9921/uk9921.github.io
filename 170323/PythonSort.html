@@ -120,23 +120,7 @@ l=[-1,26,5,77,1,61,11,59,15,48,19] #第一个元素不用，占位
 res=heapSort(l)  
 print(res)
 </code></pre>
-<pre><code> 
-class Solution(object):
-    def lengthOfLongestSubstring(self, s):
-        """
-        :type s: str
-        :rtype: int
-        """
-        used_char = {}
-        res = begin = 0
-        for i in range(0,len(s)):
-            if used_char.has_key(s[i]) and begin <= used_char[s[i]]:
-                begin = used_char[s[i]]+1
-            else:
-                res = max(res, i-begin+1)
-            used_char[s[i]] = i
-        return res
-</code></pre>
+
 
 
 
