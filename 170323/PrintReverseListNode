@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Kuqs个人博客 by uk9921</title>
+
+    <link rel="stylesheet" href="../../stylesheets/styles.css">
+    <link rel="stylesheet" href="../../stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Kuqs个人博客</h1>
+        <p>Long May The Sunshine !</p>
+
+
+        <p class="view"><a href="https://github.com/uk9921">View My GitHub Profile</a></p>
+
+      </header>
+      <section>
+        <h2>
+
+<a id="python" class="anchor"  aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="">Python in leetcode [最长不重复子串]</a>
+</h2>
+
+
+<p>
+输入一个链表，从尾到头打印链表每个节点的值。
+</p>
+
+<pre><code> 
+# -*- coding:utf-8 -*-
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+ 
+class Solution:
+    # 返回从尾部到头部的列表值序列，例如[1,2,3]
+    def printListFromTailToHead(self, listNode):
+        # write code here
+        str = []
+        if listNode == None:
+            return str
+        while True:
+            if listNode!=None:
+                str.append(listNode.val)
+                listNode = listNode.next
+            else:
+                break
+        str = str[::-1]
+        return str
+</code></pre>
+
+<p>
+用list保存一下ListNode，然后反转，搞定~用时20ms
+</p>
+<pre><code> 
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        used_char = {}
+        res = begin = 0
+        for i in range(0,len(s)):
+            if used_char.has_key(s[i]) and begin <= used_char[s[i]]:
+                begin = used_char[s[i]]+1
+            else:
+                res = max(res, i-begin+1)
+            used_char[s[i]] = i
+        return res
+</code></pre>
+
+
+
+
+
+      </section>
+      <footer>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
