@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Kuqs个人博客 by uk9921</title>
+
+    <link rel="stylesheet" href="../../stylesheets/styles.css">
+    <link rel="stylesheet" href="../../stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Kuqs个人博客</h1>
+        <p>Long May The Sunshine !</p>
+
+
+        <p class="view"><a href="https://github.com/uk9921">View My GitHub Profile</a></p>
+
+      </header>
+      <section>
+        <h2>
+
+<a id="python-in-leetcode-最长回文子串" class="anchor"  aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="">Python in leetcode [最长不重复子串]</a>
+</h2>
+
+
+<p>
+Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.
+</p>
+<p>
+Input: "babad"
+<br>
+Output: "bab"
+</p>
+<pre><code> 
+class Solution(object):
+    def longestPalindrome(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        longest,start = 1,0
+        for i in xrange(len(s)):
+            #s[i]和s[i-len-1]构成回文首尾：如……abcba中a和a构成首尾，长度每次递增2
+            if i-longest-1>=0 and s[i-longest-1:i+1] == s[i-longest-1:i+1][::-1]:
+                start = i-longest-1
+                longest += 2
+                continue
+            #s[i]和s[1-len]构成回文首尾：如……bb中b和b构成首尾，长度每次递增1
+            if i-longest>=0 and s[i-longest:i+1] == s[i-longest:i+1][::-1]:
+                start = i-longest
+                longest += 1
+        return s[start:start+longest]
+</code></pre>
+
+<p>
+最初使用了两层for循环，运行超时了，新方法如上，使用一层循环记最长回文子串的开始下标和长度。
+</p>
+<pre><code> 
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        used_char = {}
+        res = begin = 0
+        for i in range(0,len(s)):
+            if used_char.has_key(s[i]) and begin <= used_char[s[i]]:
+                begin = used_char[s[i]]+1
+            else:
+                res = max(res, i-begin+1)
+            used_char[s[i]] = i
+        return res
+</code></pre>
+
+
+
+
+
+      </section>
+      <footer>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
