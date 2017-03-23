@@ -58,26 +58,6 @@ class Solution:
 <p>
 考察动态规划，只需要顺着根节点找到下一层的“根节点”，返回给上一层做左右孩子结点~~
 </p>
-<pre><code> 
-class Solution(object):
-    def lengthOfLongestSubstring(self, s):
-        """
-        :type s: str
-        :rtype: int
-        """
-        used_char = {}
-        res = begin = 0
-        for i in range(0,len(s)):
-            if used_char.has_key(s[i]) and begin <= used_char[s[i]]:
-                begin = used_char[s[i]]+1
-            else:
-                res = max(res, i-begin+1)
-            used_char[s[i]] = i
-        return res
-</code></pre>
-
-
-
 
 
       </section>
