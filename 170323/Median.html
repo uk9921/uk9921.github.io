@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Kuqs个人博客 by uk9921</title>
+
+    <link rel="stylesheet" href="../../stylesheets/styles.css">
+    <link rel="stylesheet" href="../../stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Kuqs个人博客</h1>
+        <p>Long May The Sunshine !</p>
+
+
+        <p class="view"><a href="https://github.com/uk9921">View My GitHub Profile</a></p>
+
+      </header>
+      <section>
+        <h2>
+
+<a id="python-in-leetcode-两个数组的中值" class="anchor"  aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="">Python in leetcode  [两个数组中值]</a>
+</h2>
+
+
+<p>
+There are two sorted arrays nums1 and nums2 of size m and n respectively.
+</p>
+<p>
+Find the median of the two sorted arrays. The overall run time complexity should be <code>O(log (m+n))</code>.
+</p>
+<p>
+nums1 = [1, 2]
+nums2 = [3, 4]
+
+The median is (2 + 3)/2 = 2.5
+</p>
+<pre><code> 
+class Solution(object):
+    def findMedianSortedArrays(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: float
+        """
+        while 1:
+            if len(nums1)+len(nums2) <= 2:
+                if len(nums1) == 0:
+                    res = float(nums2[0]+nums2[-1])/2
+                elif len(nums2) == 0:
+                    res = float(nums1[0]+nums1[-1])/2
+                else:
+                    res = float(nums1[0]+nums2[0])/2
+                break;
+            if len(nums1) == 0:
+                if len(nums2) > 2:
+                    del nums2[0]
+                    del nums2[-1]
+                elif len(nums2) > 1:
+                    res = float(nums2[0]+nums2[-1])/2
+                    break
+                else:
+                    res = nums2[0]
+                    break;                
+            elif len(nums2) == 0:
+                if len(nums1) > 2:
+                    del nums1[0]
+                    del nums1[-1]
+                elif len(nums1) > 1:
+                    res = float(nums1[0]+nums1[-1])/2
+                    break;
+                else:
+                    res = nums1[0]
+                    break;
+            else:
+                if nums1[0] < nums2[0]:
+                    del nums1[0]
+                elif nums1[0] > nums2[0]:
+                    del nums2[0]
+                else:
+                    if len(nums1) > len(nums2):
+                        del nums1[0]
+                    else:
+                        del nums2[0]
+    
+                if len(nums1) == 0:
+                    del nums2[-1]
+                elif len(nums2) == 0:
+                    del nums1[-1]
+                else:
+                    if nums1[-1] > nums2[-1]:
+                        del nums1[-1]
+                    elif nums1[-1] < nums2[-1]:
+                        del nums2[-1]
+                    else:
+                        if len(nums1) > len(nums2):
+                            del nums1[-1]
+                        else:
+                            del nums2[-1]
+        return float(res)
+</code></pre>
+
+<p>
+思想是每次循环删除两个list中一个最小的和一个最大的，最后剩下的一个数或者两个数的均值就是要返回的值。
+<br>
+但是要判断的情况太多了,看了一下评论区也没有特别赏心悦目的
+</p>
+<pre><code> 
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        used_char = {}
+        res = begin = 0
+        for i in range(0,len(s)):
+            if used_char.has_key(s[i]) and begin <= used_char[s[i]]:
+                begin = used_char[s[i]]+1
+            else:
+                res = max(res, i-begin+1)
+            used_char[s[i]] = i
+        return res
+</code></pre>
+
+
+
+
+
+      </section>
+      <footer>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
